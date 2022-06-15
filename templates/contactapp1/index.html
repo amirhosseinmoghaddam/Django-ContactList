@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <br>
+    <br>
+    {% if user.is_authenticated %}
+       <div>
+           <a href="{% url 'add' %}" class="btn btn-dark">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                 <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+              </svg>
+            Add contact
+           </a>
+           {% if reset_filter %}
+              <a class="btn btn-deactive" href="{% url 'index' %}">
+               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-filter-right" viewBox="0 0 16 16">
+                  <path d="M14 10.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 .5-.5zm0-3a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0 0 1h7a.5.5 0 0 0 .5-.5zm0-3a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0 0 1h11a.5.5 0 0 0 .5-.5z"/>
+               </svg>
+               Reset Search
+              </a>
+           {% endif %}
+           <br>
+           <br>
+           {% for contact in contacts %}
+           <a href="{% url 'detail' contact.id %}" class="text-decoration-none text-dark">
+              <div class="card text-center" style="margin-bottom: 3px;">
+                <div class="card-body">
+                  <h4 class="card-title">{{ contact.firstname }} {{ contact.lastname }}</h4>
+                </div>
+              </div>
+           </a>
+
+           {% empty %}
+           <hr>
+           <h3 style="text-align: center;">There is not any contacts</h3>
+
+           {% endfor %}
+       </div>
+    {% endif %}
+</div>
+{% endblock %}

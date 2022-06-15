@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Add contact
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <br> 
+    <h2 style="text-align: center;">Add contact</h2>
+    <br>
+    <form method="post">        
+        {% csrf_token %}
+        <select name="username" required id="id_username" hidden>
+           <option value="{{ user.id }}" selected>{{ user.username }}</option>
+        </select>
+      
+       <input type="text" class="form-control" name="firstname" id="id_firstname" placeholder="Firstname"><br>
+       <input type="text" class="form-control" name="lastname" id="id_lastname" placeholder="Lastname"><br>
+       <select name="tel_type" id="id_tel_type" class="form-control" >
+           <option value="Mobile" selected>Mobile</option>
+           <option value="Home">Home</option>
+           <option value="Work">Work</option>
+           <option value="Other">Other</option>
+       </select><br>
+       <input type="text" class="form-control"  name="number" id="id_number" placeholder="Number"><br>
+       <div style="text-align: right;">
+         <a class="btn btn-secondary" href="{% url 'index' %}">Cancel</a>
+         <button class="btn btn-success">Add contact</button>
+       </div>
+    </form>
+</div>
+{% endblock %}
