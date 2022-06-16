@@ -9,8 +9,11 @@ from .forms import AddContactForm
 
 @login_required
 def index(request):
+    #check search box
     if 'search' in request.GET:
+        #get search data
         search = request.GET['search']
+        #filter users by search
         contacts = Contact.objects.filter(username=request.user, firstname__icontains=search)
         return render(request, 'contactapp1/index.html', {'contacts': contacts, 'reset_filter': True})
 
